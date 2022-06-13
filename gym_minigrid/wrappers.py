@@ -230,7 +230,7 @@ class FullyObsWrapper(gym.core.ObservationWrapper):
             [OBJECT_TO_IDX["agent"], COLOR_TO_IDX["red"], env.agent_dir]
         )
 
-        return {**obs, "image": full_grid}
+        return {**obs, "image": full_grid, "partial_image": obs["image"]}
 
 
 class FlatObsWrapper(gym.core.ObservationWrapper):

@@ -202,7 +202,7 @@ class Wall(WorldObj):
         super().__init__("wall", color)
 
     def see_behind(self):
-        return True
+        return False
 
     def render(self, img):
         fill_coords(img, point_in_rect(0, 1, 0, 1), COLORS[self.color])

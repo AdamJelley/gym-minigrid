@@ -1,6 +1,7 @@
 import math
 import operator
 from functools import reduce
+from enum import IntEnum
 
 import numpy as np
 import gym
@@ -381,3 +382,25 @@ class SymbolicObsWrapper(gym.core.ObservationWrapper):
         grid = np.transpose(grid, (1, 2, 0))
         obs["image"] = grid
         return obs
+
+
+class NavigationActionWrapper(gym.core.ActionWrapper):
+    """
+    Wrapper to limit the agent's actions to navigation actions only.
+    Only applicable to environments where interaction is not required.
+    """
+
+    class Actions(IntEnum):
+        # Turn left, turn right, move forward
+        left = 0
+        right = 1
+        forward = 2
+
+    def __init__(self, env):
+        super().__init__(env)
+
+        self.actions = self.Actions
+        self.action_space = spaces.Discrete(len(self.actions))
+
+    def action(self, act):
+        return act
